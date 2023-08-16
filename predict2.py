@@ -34,15 +34,24 @@ def json_to_dataframe(json_data):
     return df
 
 def info(link):
-    try: 
+    try:
+        print("Link:", link)
         track_id = re.search(r'track\/([^/?]+)', link).group(1)
+        print("Extracted Track ID:", track_id)
+
         track_data = sp.track(track_id)
-        df = json_to_dataframe(track_data)
         track_name = track_data['name']
-        artist = df.loc[0,'Artist Name']
+
+        artists = track_data['artists']
+        artist_names = [artist['name'] for artist in artists]
+
+        artist = ', '.join(artist_names)
+
         return track_name, artist
-    except:
-        print("Error! Enter a valid link")
+
+    except Exception as e:
+        print("Error:", e)
+        return "Error! Enter a valid link"
 
 def download_song(song_name, artist_name):
     search_query = f'{song_name} {artist_name} audio'
