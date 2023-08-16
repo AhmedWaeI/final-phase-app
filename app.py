@@ -4,6 +4,7 @@ from predict2 import *
 import os
 
 app = Flask(__name__)
+app.secret_key = 'nthh'
 
 
 @app.route('/')
