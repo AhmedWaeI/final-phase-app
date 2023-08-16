@@ -1,4 +1,3 @@
-#dd
 import pickle
 import pychorus as pc
 import soundfile as sf
