@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hit Songs Prediction</title>
+    <style>
+        body {
+            background-image: url('{{ url_for("static", filename="images/Background-Music.jpg") }}');
+
+        }
+
+        button {
+            background-color: #4CAF50;
+            border-width: 2px;
+            border-color: #135816;
+            color: rgb(255, 255, 255);
+            padding: 15px 32px;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 30px;
+        }
+
+        div {
+            background: rgba(255, 255, 255, .6);
+            text-align: center;
+            width: 50%;
+            margin: auto;
+            margin-top: 190px;
+            padding-top: 75px;
+            height: 300px;
+        }
+
+        a {
+            color: rgb(255, 255, 255);
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            text-decoration: none
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>Hit Song Prediction:</h1>
+        <h3>We can predict if your song will be popular or not.</h3>
+        <button><a href="/upload">Upload Song file</a></button>
+        <button><a href="/link">Enter Song spotify link</a></button>
+    </div>
+</body>
+
+</html>
