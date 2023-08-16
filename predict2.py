@@ -70,7 +70,7 @@ def download_song(song_name, artist_name):
         'quiet': True,
         'outtmpl': output_file,
         # 'audioformat': "wav",
-        'ffmpeg_location': r"C:/Users/DELL/Downloads/ffmpeg-2023-08-10-git-d9d5695390-full_build/bin"
+        'ffmpeg_location': r"C:/Users/slayer/Desktop/New folder/ffmpeg-6.0-full_build/bin"
     }
 
     try:
