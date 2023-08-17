@@ -58,3 +58,9 @@ websockets==11.0.3
 Werkzeug==2.3.7
 yt-dlp==2023.7.6
 zipp==3.16.2
+pychorus
+soundfile
+librosa
+numpy
+scipy
+scikit-learn
