@@ -64,3 +64,4 @@ librosa
 numpy
 scipy
 scikit-learn
+azure-storage-blob==12.10.0
