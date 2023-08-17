@@ -6,6 +6,7 @@ import regex as re
 import yt_dlp
 import os
 from pydub import AudioSegment
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 
 # Create a Spotify client
 client_credentials_manager = SpotifyClientCredentials(client_id='6ca1248789cb422e95219c81841a7e74', client_secret='ca5dcd94b28c4932b33bc1134cbb4900')
@@ -91,7 +92,41 @@ def download_song(song_name, artist_name):
         print(f'Error occurred while downloading {song_name} {artist_name}: {str(e)}')
         return None  # Return None to indicate an error
 
-def predict_spotify(link):
-    track_name, artist = info(link)
-    download_file = download_song(track_name, artist)
-    return predict(download_file + '.wav')
+connection_string = "DefaultEndpointsProtocol=https;AccountName=songs55001122;AccountKey=TYtAi/ejgm6x1mka/i1pZxuQnTZBUM0pwfIqEVbouBZx0Ur0zX6dM9QxmZY2tpaLUwJGJB3P2+qS+AStsNWImQ==;EndpointSuffix=core.windows.net"
+
+def upload_to_azure_storage(local_file_path, remote_file_name):
+    try:
+        blob_service_client = BlobServiceClient.from_connection_string(connection_string)
+        container_name = "songss44124"  # Replace with your container name
+        
+        blob_client = blob_service_client.get_blob_client(container=container_name, blob=remote_file_name)
+        
+        with open(local_file_path, "rb") as data:
+            blob_client.upload_blob(data)
+        
+        print(f'File {local_file_path} uploaded to {remote_file_name} in Azure Storage')
+    except Exception as e:
+        print(f'Error uploading {local_file_path} to Azure Storage: {e}')
+
+def predict_and_upload(link):
+    try:
+        track_name, artist = info(link)
+        download_file = download_song(track_name, artist)
+        
+        if download_file:
+            prediction = predict(download_file + '.wav')
+            
+            # Upload the downloaded file to Azure Storage
+            remote_file_name = os.path.basename(download_file) + '.wav'
+            upload_to_azure_storage(download_file + '.wav', remote_file_name)
+            
+            return prediction
+        else:
+            return "Error downloading the song"
+    except Exception as e:
+        return f"Error: {e}"
+
+# Example usage
+link = "https://open.spotify.com/track/0qMip0B2D4ePEjBJvAtYre?si=e623353611d94250"
+result = predict_and_upload(link)
+print("Prediction:", result)
