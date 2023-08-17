@@ -7,6 +7,7 @@ import yt_dlp
 import os
 from pydub import AudioSegment
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
+from predict1 import predict
 
 # Create a Spotify client
 client_credentials_manager = SpotifyClientCredentials(client_id='6ca1248789cb422e95219c81841a7e74', client_secret='ca5dcd94b28c4932b33bc1134cbb4900')

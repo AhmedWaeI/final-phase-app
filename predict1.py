@@ -11,7 +11,7 @@ from sklearn.decomposition import PCA
 import scipy
 # import eli5
 # from eli5.sklearn import PermutationImportance
-
+from predict2 import *
 
 loaded_model = pickle.load(open('Classification_Pipeline.pkl', 'rb'))
 # test1 = pd.read_csv('test1.csv')
@@ -104,3 +104,12 @@ def predict(test_file):
         return 'Popular'
     else : 
         return 'Unpopular'
+def predict_spotify(link):
+    track_name, artist = info(link)
+    download_file = download_song(track_name, artist)
+    
+    if download_file:
+        prediction = predict(download_file)  # No need to add '.wav' here
+        return prediction
+    else:
+        return "Error downloading the song"
